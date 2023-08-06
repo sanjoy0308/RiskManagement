@@ -10,7 +10,7 @@ using riskmanagement as rm from '../db/schema';
    miti @title : 'Mitigation';
    impact @title : 'Impact';
    //### BEGIN OF INSERT
-   bp @title : 'Business Partner';
+    bp @title : 'Business Partner';
    //### END OF INSERT
    criticality @title : 'Criticality';
  }

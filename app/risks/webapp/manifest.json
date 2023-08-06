@@ -12,12 +12,12 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
-      "version": "1.10.4",
-      "toolsId": "aca5273f-a04f-4125-83dd-91b8e4639226"
+      "version": "1.10.3",
+      "toolsId": "bf1c5f73-d00e-42f2-afed-55ea02b53d7d"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/service/risk/",
+        "uri": "/odata/v4/service/risk/",
         "type": "OData",
         "settings": {
           "annotations": [],

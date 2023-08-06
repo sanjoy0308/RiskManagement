@@ -31,3 +31,5 @@ mta_archives/
 .idea
 
 .env
+app/risks/dist/
+resources/*.zip

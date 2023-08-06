@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
         <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
     </edmx:Reference>
@@ -14,12 +17,14 @@
             <EntityContainer Name="EntityContainer">
                 <EntitySet Name="Risks" EntityType="RiskService.Risks">
                     <NavigationPropertyBinding Path="miti" Target="Mitigations"/>
+                    <NavigationPropertyBinding Path="bp" Target="BusinessPartners"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Risks"/>
                 </EntitySet>
                 <EntitySet Name="Mitigations" EntityType="RiskService.Mitigations">
                     <NavigationPropertyBinding Path="risks" Target="Risks"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Mitigations"/>
                 </EntitySet>
+                <EntitySet Name="BusinessPartners" EntityType="RiskService.BusinessPartners"/>
             </EntityContainer>
             <EntityType Name="Risks">
                 <Key>
@@ -40,6 +45,10 @@
                 </NavigationProperty>
                 <Property Name="miti_ID" Type="Edm.Guid"/>
                 <Property Name="impact" Type="Edm.Int32"/>
+                <NavigationProperty Name="bp" Type="RiskService.BusinessPartners">
+                    <ReferentialConstraint Property="bp_BusinessPartner" ReferencedProperty="BusinessPartner"/>
+                </NavigationProperty>
+                <Property Name="bp_BusinessPartner" Type="Edm.String" MaxLength="10"/>
                 <Property Name="criticality" Type="Edm.Int32"/>
                 <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
                 <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
@@ -66,6 +75,14 @@
                 <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
                 <NavigationProperty Name="DraftAdministrativeData" Type="RiskService.DraftAdministrativeData" ContainsTarget="true"/>
                 <NavigationProperty Name="SiblingEntity" Type="RiskService.Mitigations"/>
+            </EntityType>
+            <EntityType Name="BusinessPartners">
+                <Key>
+                    <PropertyRef Name="BusinessPartner"/>
+                </Key>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="LastName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="FirstName" Type="Edm.String" MaxLength="40"/>
             </EntityType>
             <EntityType Name="DraftAdministrativeData">
                 <Key>
@@ -203,6 +220,26 @@
                                                             </Annotations>
                                                             <Annotations Target="RiskService.Mitigations/DraftAdministrativeData">
                                                                 <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="RiskService.EntityContainer/BusinessPartners">
+                                                                <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                    <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                        <PropertyValue Property="Deletable" Bool="false"/>
+                                                                    </Record>
+                                                                </Annotation>
+                                                                <Annotation Term="Capabilities.InsertRestrictions">
+                                                                    <Record Type="Capabilities.InsertRestrictionsType">
+                                                                        <PropertyValue Property="Insertable" Bool="false"/>
+                                                                    </Record>
+                                                                </Annotation>
+                                                                <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                    <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                        <PropertyValue Property="Updatable" Bool="false"/>
+                                                                    </Record>
+                                                                </Annotation>
+                                                            </Annotations>
+                                                            <Annotations Target="RiskService.BusinessPartners/BusinessPartner">
+                                                                <Annotation Term="Core.Description" String="Key identifying a business partner in the SAP system. The key is unique within a client."/>
                                                             </Annotations>
                                                             <Annotations Target="RiskService.DraftAdministrativeData">
                                                                 <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>

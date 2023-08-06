@@ -1,13 +1,13 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Sun Aug 06 2023 21:45:13 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Mon Jul 31 2023 21:58:54 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.10.4|
+|**App Generator Version**<br>1.10.3|
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>Local Cap|
-|**Service URL**<br>http://localhost:4004/service/risk/
+|**Service URL**<br>http://localhost:4004/odata/v4/service/risk/
 |**Module Name**<br>risks|
 |**Application Title**<br>Risks|
 |**Namespace**<br>riskmanagement|
@@ -20,7 +20,7 @@
 
 ## risks
 
-Risk Management 
+Risk Management
 
 ### Starting the generated app
 
